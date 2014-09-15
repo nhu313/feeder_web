@@ -1,0 +1,10 @@
+<h1>Feeds</h1>
+<ul>
+<%= for feed <- @feeds do %>
+  <li>
+    <h3><%= feed.title %></h3>
+    <%= feed.body %>
+  </li>
+<% end %>
+</ul>
+

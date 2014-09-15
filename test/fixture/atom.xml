@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>8th Light Blog</title>
+ <link href="http://8thlight.github.com/feed/atom.xml" rel="self"/>
+ <link href="http://8thlight.github.com/"/>
+ <icon>http://8thlight.github.com/favicon.ico</icon>
+ <updated>2014-07-11T08:18:51-07:00</updated>
+ <id>http://8thlight.github.com/</id>
+
+
+ <entry>
+   <title>Take Pride in Your Legacy (Code)</title>
+   <category term="ginny-hendry" />
+   <link href="http://8thlight.github.com/ginny-hendry/2014/07/11/take-pride-in-your-legacy-code.html"/>
+   <author>
+     <name>["ginny hendry"]</name>
+   </author>
+   <updated>2014-07-11T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/ginny-hendry/2014/07/11/take-pride-in-your-legacy-code</id>
+   <content type="html">&lt;p&gt;A developer joining a project, unless the project is starting a completely new
+application, will be working with dreaded “legacy code.” The process of becoming
+productive in a legacy codebase can be a nightmare. Legacy code has earned its
+reputation for being poorly structured, hard to work with, undocumented, and obscure.
+You’ll see evidence in the code of the different programming styles of all the
+developers who ever  worked on that legacy codebase.&lt;/p&gt;
+
+&lt;p&gt;Complicating this reality is the fact that legacy code is live. Any improvements you
+want to make need to be incremental because, by definition, legacy code already has
+users. Users expect zero downtime, fast response times, and a consistent look and feel.
+Users expect a seamless surface and experience, and they have no idea how messy things
+can be underneath the interface they use.&lt;/p&gt;
+
+&lt;p&gt;Often legacy code is dependent on languages or hardware that is now obsolete. The code
+has probably been written poorly and is difficult to understand. The previous
+programmers are unlikely to be available to answer any questions. You’ll have a hard
+time understanding what they were thinking and why they chose to write their code the
+way they did.&lt;/p&gt;
+
+&lt;p&gt;When developers are programming under the usual time and budget pressures, they tend
+to build up technical debt.  This debt may be caused by poor coding practices or by
+the desire to get things done quickly, but even the most careful developers can’t
+predict how their code will be used and extended in the future. It’s hard to develop
+a single feature or fix one bug while still considering the overall design of the
+application, especially when you’re new to the project. Over time the code gets
+inconsistent. Different components are developed in different ways.&lt;/p&gt;
+
+&lt;p&gt;But imagine if that wasn’t the case. Imagine joining a project with a codebase where
+you can’t see the tracks of the many different developers who built it. Imagine if,
+for example, all the text or date-handling routines were neatly isolated into one
+utility file used consistently throughout the application.  Imagine if legacy code
+was like other legacies in our lives—like the antiques, heirlooms, and stories that
+are cherished and lovingly passed down from one generation to the next. What if
+legacy code was something we took pride in?&lt;/p&gt;
+
+&lt;p&gt;We usually think about legacies when we’re on the receiving end, but how would our
+code change if we remembered that at every step in our programming career we are
+creating a legacy for the developers who follow us?&lt;/p&gt;
+
+&lt;p&gt;An example is a recent project here at 8th Light that has treated its code this way.
+Every person on our team sticks to the same conventions so the architecture and
+naming are as consistent and predictable as possible throughout the application.
+Because we’re all doing things the same way we can more easily understand, modify,
+and extend our codebase as the customer’s requirements change.&lt;/p&gt;
+
+&lt;p&gt;Recently a developer new to the project submitted a pull request for a new feature.
+It worked well and the code was quite good but we asked him to change half a dozen
+things to follow conventions more closely anyway.  The feature took a bit more time
+to complete because of this extra development step but the code is now more
+consistent and easier for us and future developers on the project to understand
+and extend.  &lt;/p&gt;
+
+&lt;p&gt;This particular project has had many different developers contribute to the codebase
+in the year since we started work. Since we have been careful throughout to build
+the code in a consistent and well-structured way, our code is more intuitive and
+coherent and we can be sure that developers who join the team later will have an
+easier time onboarding. Every developer who has joined the team has left behind
+legacy code for those who follow.&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>Apprentice Blog of the Week: Useful Clojure Macros For The Object Oriented Programmer</title>
+   <category term="alex-hill" />
+   <link href="http://8thlight.github.com/alex-hill/2014/07/10/useful-clojure-macros-for-the-object-oriented-programmer.html"/>
+   <author>
+     <name>["alex hill"]</name>
+   </author>
+   <updated>2014-07-10T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/alex-hill/2014/07/10/useful-clojure-macros-for-the-object-oriented-programmer</id>
+   <content type="html">&lt;p&gt;One of the most difficult aspects of learning Clojure for most programmers who
+have been brought up in the object oriented tradition is the Lisp syntax. Over
+time many of us grow to love it, but it’s usually rough and slow going at first.
+This post outlines several macros that you can use that will make your code look
+more familiar, and make you feel at home in Clojure Land. I will also go over how
+you can start using these macros, and eventually refactor them into a more
+terse, idiomatic, and functional style.&lt;/p&gt;
+
+&lt;p&gt;By far the most useful macro for me is the &lt;code&gt;loop&lt;/code&gt; macro. This macro allows you
+to pretend as if you had some collection of objects that you’d like to iterate
+over and mutate, despite the fact that Clojure’s data structures are immutable.
+Here’s a simple example of using &lt;code&gt;loop&lt;/code&gt; to increment each number in a collection
+by one:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clj&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;vals &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;loop &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;        &lt;span class=&quot;nv&quot;&gt;input-left&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;count &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;input-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;nv&quot;&gt;output&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;recur&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;conj &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;first &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;input-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;            &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rest &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;input-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; (2 3 4)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here’s how it works: you pass a vector of local variables to &lt;code&gt;loop&lt;/code&gt; to
+modify recursively. In this case, and in most others, your two variables will
+represent input and output. We’ve set output to an empty list. We’ve named our
+list of values “input-left” because it represents the remaining input. You might
+think it’s strange to call it input-left instead of input, but this makes it clear
+that we’re modifying and removing one element of the input list each time we recur.&lt;/p&gt;
+
+&lt;p&gt;All recursive algorithms need a point at which to stop looping. This is called
+the base case. Our base case is very simple. We just keep looping until we’ve
+modified all of the input values. The call to recur is probably the least familiar
+part of this to the eyes of an OO programmer. By calling recur, we’re basically
+instructing our code to return to the top of the loop with the modified values. The
+arguments to recur represent each local variable we defined in the loop&amp;mdash;you
+must supply the correct number of arguments, and they must be in the correct order.
+As you can see, we increment the value we’re currently iterating over by one, add
+it to the end of the output list, and recur with our new output and the rest of the
+remaining input.&lt;/p&gt;
+
+&lt;p&gt;However, you’ll quickly learn that &lt;code&gt;loop&lt;/code&gt; is not always the best way to express your
+thoughts in Clojure. When iterating over a collection, I usually start with
+a &lt;code&gt;loop/recur&lt;/code&gt; and later refactor it into something simpler by using functions
+like &lt;code&gt;map&lt;/code&gt; or &lt;code&gt;reduce&lt;/code&gt;. In this case, achieving the same result functionally is
+extremely trivial: &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clj&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;vals &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;vals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; (2 3 4)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;map&lt;/code&gt; is at the heart of the Clojure language. Its first argument is a function,
+and its second argument is a sequence. It applies that function to each element in
+the sequence and returns a new sequence. In functional programming, functions are
+first-class citizens, which means they can be passed around as arguments to other
+functions. This is a huge advantage Clojure has over traditional object-oriented
+languages.&lt;/p&gt;
+
+&lt;p&gt;The solution with &lt;code&gt;map&lt;/code&gt; is clearly better, given how concise it is. You might be
+wondering why anyone would ever use &lt;code&gt;loop/recur&lt;/code&gt;. While &lt;code&gt;map&lt;/code&gt; is much more concise
+and readable in this case, in more complicated situations, the more verbose
+&lt;code&gt;loop/recur&lt;/code&gt; style may make complex operations more clear to others. It is also useful
+for fleshing out a complex algorithm that you intend to refactor later.&lt;/p&gt;
+
+&lt;p&gt;Another option that will be familiar to those coming from languages like Java is
+the &lt;code&gt;for&lt;/code&gt; macro:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clj&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; 2 3 4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;for&lt;/code&gt; also allows you to pass options to it. You can use &lt;code&gt;:while&lt;/code&gt; to tell it when
+to stop iterating, or &lt;code&gt;:when&lt;/code&gt; to filter out certain inputs:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clj&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vals&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;       &lt;span class=&quot;ss&quot;&gt;:when&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;even?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; (3)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vals&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;       &lt;span class=&quot;ss&quot;&gt;:while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;not= &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;inc &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; (2)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I tend not to use &lt;code&gt;for&lt;/code&gt; as often as &lt;code&gt;loop&lt;/code&gt;, but that is most likely due to my
+first programming language being Ruby, a language where the use of &lt;code&gt;for&lt;/code&gt; is frowned
+upon.&lt;/p&gt;
+
+&lt;p&gt;The last two macros I’d like to go over are Clojure’s threading macros. Unlike
+&lt;code&gt;loop&lt;/code&gt; and &lt;code&gt;for&lt;/code&gt;, it’s more likely that you’ll refactor toward these macros instead
+of away from them. They make your code easier to read and feel more like
+object-oriented code. Let’s start out by looking at a purely functional representation
+of an algorithm that gets the names of all the files within a specified directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clj&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; directory structure&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; public/&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;;   file1.txt&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;;   file2.txt&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;drop &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.getName&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;file-seq &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;as-file&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;public/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; (file1.txt file2.txt)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Trying to understand what’s going here can be frustrating. In what order are the
+steps of this algorithm happening? What values are being supplied as arguments to
+each function? That’s where the (-») or &lt;code&gt;thread-last&lt;/code&gt; macro comes in handy:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clj&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;file-seq &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;as-file&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;public/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.getName&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;drop &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; (test1.txt test2.txt)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now things are much more clear. First we’re going to generate a sequence of the files
+inside of the public directory, including the directory itself. Next we’re going to
+map over those files and get their name. Finally, we’re going to drop the first
+filename, because we’re not concerned with the name of the public directory that we
+already specified. The way this works is actually pretty simple: the &lt;code&gt;thread-last&lt;/code&gt;
+macro evaluates each form, then inserts that form as the last element in the next form.&lt;/p&gt;
+
+&lt;p&gt;There is also a &lt;code&gt;thread-first&lt;/code&gt; macro, which works much the same way as &lt;code&gt;thread-last&lt;/code&gt;,
+except that it places each evaluated form second in the next form. A good example for
+how it’s used is splitting an HTTP range header:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clj&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:path&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;/&amp;quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:method&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;GET&amp;quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:headers&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Range&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;bytes=1-100&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}})&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&amp;gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Range&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;split&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;=&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;nv&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;; 1-100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;These algorithms were only three steps each. As your algorithms become more complex,
+Lisp-like threading becomes harder and harder to read. The other programmers on your
+team will thank you for getting comfortable with threading macros sooner rather than
+later.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;loop&lt;/code&gt;, &lt;code&gt;for&lt;/code&gt;, and the threading macros make Clojure much more approachable than it
+would be otherwise. Don’t let your unfamiliarity with Lisp or functional programming
+scare you away from such a truly beautiful and practical language.&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>Pattern Language of Thieves</title>
+   <category term="craig-demyanovich" />
+   <link href="http://8thlight.github.com/craig-demyanovich/2014/07/09/pattern-language-of-thieves.html"/>
+   <author>
+     <name>["craig demyanovich"]</name>
+   </author>
+   <updated>2014-07-09T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/craig-demyanovich/2014/07/09/pattern-language-of-thieves</id>
+   <content type="html">&lt;p&gt;What do architects (designers of buildings), software developers, and
+thieves have in common? They each have a pattern language.&lt;/p&gt;
+
+&lt;p&gt;I was watching &lt;a href=&quot;http://www.imdb.com/title/tt0349903/&quot;&gt;“Ocean’s Twelve”&lt;/a&gt; recently when I heard the
+dialogue in a way I hadn&amp;#39;t before. If you haven&amp;#39;t seen the movie or
+don&amp;#39;t remember the scene where members of Ocean&amp;#39;s crew were discussing
+how to do a job, the dialogue moves very quickly. Ideas are shared
+freely, shot down, and replaced by alternatives one after the other.&lt;/p&gt;
+
+&lt;blockquote cite=&quot;http://www.imdb.com/title/tt0349903/quotes?item=qt0379729&quot;&gt;
+&lt;p&gt;&lt;b&gt;Linus Caldwell&lt;/b&gt;: Um, all right, let&#39;s go over the list again. Ah, Swinging Priest?&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Basher Tarr&lt;/b&gt;: Not enough people.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Linus Caldwell&lt;/b&gt;: Crazy Larry?&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Turk Malloy&lt;/b&gt;: Not enough people.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Linus Caldwell&lt;/b&gt;: Soft shoulder?&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Basher Tarr&lt;/b&gt;: Not enough people.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Linus Caldwell&lt;/b&gt;: Baker&#39;s dozen?&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Basher Tarr&lt;/b&gt;: No woman&lt;/p&gt;
+&lt;p&gt;[&lt;i&gt;pause&lt;/i&gt;]&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Basher Tarr&lt;/b&gt;: and not enough people.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Turk Malloy&lt;/b&gt;: Hell in a Handbasket?&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Linus Caldwell&lt;/b&gt;: [&lt;i&gt;sigh&lt;/i&gt;] We can&#39;t train a cat that quickly&lt;/p&gt;
+&lt;p&gt;[&lt;i&gt;pause&lt;/i&gt;]&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Linus Caldwell&lt;/b&gt;: and...&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Linus Caldwell, Basher Tarr, Turk Malloy&lt;/b&gt;: Not enough people.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Then it struck me: this is exactly the kind of conversation that’s
+possible when we have the shared language of design patterns in software.&lt;/p&gt;
+
+&lt;p&gt;I was bummed to learn, though, that the thieves&amp;#39; pattern language in the
+“Ocean’s ...” movies isn&amp;#39;t real.  Rather, it was &lt;a href=&quot;http://www.imdb.com/title/tt0240772/trivia?item=tr0745020&quot;&gt;made up&lt;/a&gt;
+by the director and producer for “Ocean’s Eleven” and used in later
+movies in the series. Nevertheless, what a fun example of pattern languages!&lt;/p&gt;
+
+&lt;p&gt;If you haven’t studied design patterns in a while (or ever) here are some great resources.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.cleancoder.com/uncle-bob/2014/06/30/ALittleAboutPatterns.html&quot;&gt;“A Little About Patterns”&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;cite&gt;&lt;a href=&quot;http://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780201633610&quot;&gt;Design Patterns: Elements of Reusable Object-Oriented Software&lt;/a&gt;&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;&lt;cite&gt;&lt;a href=&quot;http://www.informit.com/store/patterns-of-enterprise-application-architecture-9780321127426&quot;&gt;Patterns of Enterprise Application Architecture&lt;/a&gt;&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;&lt;cite&gt;&lt;a href=&quot;http://www.informit.com/store/enterprise-integration-patterns-designing-building-9780321200686&quot;&gt;Enterprise Integration Patterns&lt;/a&gt;&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;&lt;cite&gt;&lt;a href=&quot;http://www.informit.com/store/refactoring-to-patterns-9780321213358&quot;&gt;Refactoring to Patterns&lt;/a&gt;&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;&lt;cite&gt;&lt;a href=&quot;http://www.informit.com/store/applying-uml-and-patterns-an-introduction-to-object-9780131489066&quot;&gt;Applying UML and Patterns&lt;/a&gt;&lt;/cite&gt;&lt;/li&gt;
+&lt;li&gt;&lt;cite&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/The_Timeless_Way_of_Building&quot;&gt;The Timeless Way of Building&lt;/a&gt;&lt;/cite&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Keep an eye and/or ear open for other pattern languages. If you find
+any really interesting ones, let me know.&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>Apprentice Blog of the Week: Stubbing Authentication and Authorization in Controller Specs</title>
+   <category term="mike-knepper" />
+   <link href="http://8thlight.github.com/mike-knepper/2014/07/01/stubbing-authentication-and-authorization-in-controller-specs.html"/>
+   <author>
+     <name>["mike knepper"]</name>
+   </author>
+   <updated>2014-07-01T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/mike-knepper/2014/07/01/stubbing-authentication-and-authorization-in-controller-specs</id>
+   <content type="html">&lt;p&gt;Controllers are powerful and complicated objects that easily accumulate responsibilities. Even when following the classic Rails convention of &quot;Skinny Controllers, Fat Models,&quot; controllers still have a lot to handle. One extremely important responsibility is checking user authentication and authorization. The typical way to handle these two critical aspects of a web application in Rails is through the use of &lt;code&gt;before_action&lt;/code&gt; or &lt;code&gt;before_filter&lt;/code&gt; statements. These lines are called before specified actions in the controller and are capable of redirecting users before reaching those actions. For example:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NuclearLaunchCodesController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ApplicationController&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;before_action&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:authenticate_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;before_action&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:require_admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;index&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;       &lt;span class=&quot;vi&quot;&gt;@codes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;show&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;       &lt;span class=&quot;vi&quot;&gt;@code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;       &lt;span class=&quot;vi&quot;&gt;@presenter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;CodePresenter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;       &lt;span class=&quot;vi&quot;&gt;@code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;       &lt;span class=&quot;vi&quot;&gt;@code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;       &lt;span class=&quot;vi&quot;&gt;@code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save!&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;code_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;notice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Successfully created new Nuclear Launch Code!&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;rescue&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;StandardError&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;flash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_code_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;     &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;current_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;       &lt;span class=&quot;vi&quot;&gt;@current_user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_by_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:user_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:user_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;authenticate_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;login_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;notice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;You must be signed in to view that page&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;present?&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;require_admin&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;notice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;You are not authorized to perform that action&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;admin?&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;40&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;We don&#39;t want any random person browsing the web to access the index or show pages of our top secret nuclear launch codes, so we define a &lt;code&gt;before_action&lt;/code&gt; filter to make sure a user is signed in. This method redirects every request to the login page unless a user is present. An unauthenticated browser cannot ever access those actions. In addition to that rule, our &lt;code&gt;new&lt;/code&gt; and &lt;code&gt;create&lt;/code&gt; actions have even tighter security: they can only be performed by admin users. Like the &lt;code&gt;authenticate_user&lt;/code&gt; filter, &lt;code&gt;require_admin&lt;/code&gt; will redirect any user to the home page unless they are an admin user.&lt;/p&gt;
+
+&lt;p&gt;This relatively simple technique actually works great for production environments. However, it definitely complicates the spec: if we try to run these actions in a test, the filters will boot us away from any action before we reach it, and thus all tests will fail. We could create a user in the spec file and log in before running the specs, but that can get extremely complicated very quickly. The users table may have validations that we&#39;d need to know about and keep track of to successfully create a test user, and we&#39;d need to manipulate the session hash to simulate being logged in, etc. But do not fear&amp;mdash;there is a better way.&lt;/p&gt;
+
+&lt;h2&gt;Authentication&lt;/h2&gt;
+
+&lt;p&gt;First let&#39;s address authentication. Hopefully, logging in and out is tested somewhere else in the application (it had better be!), so we know that if those tests pass, the filter will work here, too. If it&#39;s safe to assume in the context of this test that the authentication method works, we just want to bypass it. It turns out we can do this fairly easily by stubbing the &lt;code&gt;before_action&lt;/code&gt;. Stubbing is a concept that often seems intimidating, but is actually quite simple: stubbing a method is like saying, &quot;Any time this method is called, &lt;em&gt;don&#39;t&lt;/em&gt; actually call it, just return X.&quot; The syntax looks like this: &lt;code&gt;object.stub(:method) { return_value }&lt;/code&gt;. In this case, our object is the controller being tested, the method is the &lt;code&gt;authenticate_user&lt;/code&gt; method, and it turns out our return value is nothing at all. Controller filters don&#39;t have a return value when they pass, but instead simply allow the controller to continue on to the requested action. So in our spec, we can simply write this to pass our &lt;code&gt;index&lt;/code&gt; and &lt;code&gt;show&lt;/code&gt; specs:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCodesController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:test_code_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCodeFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:test_code_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCodeFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;assigns all codes to @codes&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:authenticate_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:index&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:codes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_code_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_code_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;assigns the correct code to @code&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:authenticate_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_code_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_code_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;(I&#39;m hiding the details of a spec_helper factory, which generates test launch codes.)&lt;/p&gt;
+
+&lt;p&gt;When &lt;code&gt;get :index&lt;/code&gt; and &lt;code&gt;get :show&lt;/code&gt; are called, the controller intends to make the &lt;code&gt;before_action :authenticate_user&lt;/code&gt; call. But the controller recognizes that the method has been stubbed out, so it ignores the production code and continues right along. Perfect!&lt;/p&gt;
+
+&lt;h2&gt;Authorization&lt;/h2&gt;
+
+&lt;p&gt;What about the &lt;code&gt;new&lt;/code&gt; and &lt;code&gt;create&lt;/code&gt; actions? We could stub out the call to the &lt;code&gt;require_admin&lt;/code&gt; filter like we do for authentication, but let&#39;s assume that this is the only place in our app that requires admin permissions. We want to be 100 percent sure that regular users can&#39;t create new launch codes, and this is the only place that will really be tested.&lt;/p&gt;
+
+&lt;p&gt;The trick here is to allow the &lt;code&gt;before_action :require_admin&lt;/code&gt; call to be made, but simulate being logged in as an admin user in one test and as a regular user in another. But remember, we want to do this without making user objects. Fortunately, &lt;code&gt;current_user&lt;/code&gt; is a method on the controller that returns and/or fetches the current user from the session hash (technically this would be in the ApplicationController, but for readability I&#39;ve put it in the controller under test). Because &lt;code&gt;current_user&lt;/code&gt; is a method call, we can stub it and tell it to return some dummy admin user. However, that returned dummy can&#39;t just be a primitive Ruby object like a String, because it needs to have the method &lt;code&gt;admin?&lt;/code&gt; defined (otherwise we&#39;d get an &quot;undefined method&quot; error). What we need is a &quot;double&quot;:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;admin_user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;a user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:admin?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:current_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;admin_user&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The first line creates the double. The first argument, &lt;code&gt;&#39;a user&#39;&lt;/code&gt;, is little more than an identifier, but the second argument is critical: it allows the object to have the method &lt;code&gt;admin?&lt;/code&gt; called on it and return &lt;code&gt;true&lt;/code&gt;. Essentially it is defining the method and stubbing it, all in one.&lt;/p&gt;
+
+&lt;p&gt;Once the double is set up, we stub the controller&#39;s &lt;code&gt;current_user method&lt;/code&gt; to return that double. The line can also be written like this: &lt;code&gt;allow(controller).to receive(:current_user).and_return(admin_user)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We can now write the test for the &lt;code&gt;new&lt;/code&gt; action:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;assigns a new instance of a NuclearLaunchCode to @code&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;admin_user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;a user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:admin?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:current_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;admin_user&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:new&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;be_a_new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Here, &lt;code&gt;get :new&lt;/code&gt; is called. The controller recognizes &lt;code&gt;new&lt;/code&gt; as an action that necessitates first calling the &lt;code&gt;require_admin&lt;/code&gt; filter. The filter will redirect to the root page, &lt;code&gt;unless current_user.admin?&lt;/code&gt;. What is &lt;code&gt;current_user&lt;/code&gt;, a variable? A method? It&#39;s a method that has been stubbed on the controller to return a double object. Okay, next call &lt;code&gt;admin?&lt;/code&gt; on that object. Is it defined? Yes, in the definition/instantiation of the double, &lt;code&gt;admin?&lt;/code&gt; is set to return &lt;code&gt;true&lt;/code&gt;. The filter therefore does not redirect to root, but instead allows the request &lt;code&gt;get :new&lt;/code&gt; to continue on.&lt;/p&gt;
+
+&lt;h2&gt;Final Refactor&lt;/h2&gt;
+
+&lt;p&gt;After some refactoring, our controller spec becomes quite readable&amp;mdash;the requisite high-level behavior is provided without cluttering up the specs, keeping the focus on the object under test: the controller.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCodesController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:code_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCodeFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:code_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCodeFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:authenticate_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;log_in_as_admin_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;admin_user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;an admin user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;allow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:current_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and_return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;admin_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;log_in_as_regular_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;regular_user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;a regular user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;allow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:current_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and_return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;regular_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;#index&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;assigns all launch codes to @codes&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:index&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:codes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;code_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;#show&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;assigns the correct launch code to @code&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;code_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;#new&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;assigns a new NuclearLaunchCode to @code&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;log_in_as_admin_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:new&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;be_a_new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;40&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;does not allow non-admin users to see the new code page&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;41&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;log_in_as_regular_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;42&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:new&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;43&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;44&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;45&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;46&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;47&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;#create&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;48&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;allows admins to create a new NuclearLaunchCode&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;49&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;log_in_as_admin_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;50&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:launch_sequence&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12345&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Moscow&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;51&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;52&lt;/span&gt;           &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;53&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;54&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;new_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_by_launch_sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12345&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;55&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new_code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Moscow&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;56&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;57&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;58&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;doesn&amp;#39;t allow non-admins to create a new code&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;59&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;log_in_as_regular_user&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;60&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:launch_sequence&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12345&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Moscow&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;61&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;62&lt;/span&gt;           &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;63&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;NuclearLaunchCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;64&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;65&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;66&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/p&gt;</content>
+ </entry>
+
+ <entry>
+   <title>Finding Team Dignity</title>
+   <category term="paul-pagel" />
+   <link href="http://8thlight.github.com/paul-pagel/2014/06/30/finding-team-dignity.html"/>
+   <author>
+     <name>["paul pagel"]</name>
+   </author>
+   <updated>2014-06-30T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/paul-pagel/2014/06/30/finding-team-dignity</id>
+   <content type="html">&lt;p&gt;In his recent  &lt;a href=&quot;http://blog.8thlight.com/doug-bradbury/2014/06/09/gender-equality-is-not-enough.html&quot;&gt;post&lt;/a&gt;, Doug Bradbury claims that aiming for gender equality runs the risk of further homogenizing our culture. Instead, he suggests that we should embrace the differences in gender as an opportunity to create diversity within our teams.&lt;/p&gt;
+
+&lt;p&gt;Kevin Buchanan follows with a &lt;a href=&quot;http://blog.8thlight.com/kevin-buchanan/2014/06/13/individuals-not-groups.html&quot;&gt;post&lt;/a&gt; saying that thinking in terms of individuals is superior to thinking about groups of people. By including every group of people equally, the math says there are more superior individuals. &lt;/p&gt;
+
+&lt;p&gt;I think both of these state good priorities:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We should embrace differences over teaching sameness.&lt;/li&gt;
+&lt;li&gt;Superior talent comes from individuals, so we want as many individuals as possible.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I want to examine what these lessons might look like in the real world, and flesh out techniques that make both of these statements possible.&lt;/p&gt;
+
+&lt;h1&gt;Diverse approaches&lt;/h1&gt;
+
+&lt;p&gt;The software industry has been so homogenous in its history that the approaches to teaching, communicating, managing, and working have all been specialized for the group of people who have always fit in. The original teachers passed down the lessons that resonated for them, which resonated with like-minded learners who went on to become teachers themselves. It led to a lineage of like-minded teachers, and it has worked to insulate the industry’s approach to the craft of software.&lt;/p&gt;
+
+&lt;p&gt;I have been guilty of this practice myself. When an apprentice doesn’t meet a deadline, I will use the “tough love” approach to motivate them to do better next time. It was an approach my mentors have used on me. I have had lots of apprentices who responded positively to this message, and used it as a hard lesson to expect more from themselves. But there are others who were discouraged and demoralized. Because they did not respond positively to this technique, they did not grow as students in the same ways.&lt;/p&gt;
+
+&lt;p&gt;Every teacher knows that people learn in different ways, and it is difficult to have any group of people learn the same material at the same time. The most challenging part of teaching is not understanding the material for yourself, but understanding how to present the material so that it resonates with the students. &lt;/p&gt;
+
+&lt;p&gt;Our approaches need to broaden with the diversity of our industry. How do we teach new material to a diverse audience? How do we inspire individuals to actualize their potential, and how can this fit within a group?  &lt;/p&gt;
+
+&lt;p&gt;Acknowledging the differences makes us have to use diverse approaches to embrace teaching to those differences.&lt;/p&gt;
+
+&lt;h1&gt;Team Dignity&lt;/h1&gt;
+
+&lt;p&gt;More often than not, I’m faced with situations that need guidelines or leadership more than they need a punishment. Punishments draw boundaries to delineate what is inadvisable or bad; they don’t provide a solid understanding of what behavior is advisable or good. The “tough love” approach produces negative feelings like guilt in most everyone, but it does not produce equal and opposite feelings of motivation in everyone. I’m not really leading if I’m only drawing boundaries. I need a way to approach these situations that explains positive outcomes. So instead of creating rules that define maximum limits, let’s try thinking about limits in terms of minimums. What are the minimum thresholds we must meet to ensure that all members are able to maximize their capabilities?&lt;/p&gt;
+
+&lt;p&gt;To do this, we can use a type of thinking inspired by Martha Nussbaum’s capabilities approach. She frames human rights by considering which human needs must be met in order to fulfill a person’s dignity, or innate human value. Only when that dignity is fulfilled can we expect a person to actualize their capabilities. While she uses this approach to talk about a broader and more serious set of problems, I want to know what a technology team would look like with guaranteed human dignity.&lt;/p&gt;
+
+&lt;p&gt;Let’s start with an example: Does unexpected overtime allow for the dignity of team members who leave?&lt;/p&gt;
+
+&lt;p&gt;Everyone has been in a situation in which the project depends on the team putting in extra effort to get it out the door. Employers or teammates treat leaving early like a crime against camaraderie. “Don’t you care about the team?”  “Don’t you care about the project?”&lt;/p&gt;
+
+&lt;p&gt;We all have to sacrifice at times for work and sacrifice at times for family, but demanding unexpected overtime is reducing the dignity of the team member who has to leave.  Being able to leave your work at a planned time creates sustainable pace. As a team, we must strive to create rules that protect this level of dignity. We need rules to protect the environment and create a safe and supportive place to work.&lt;/p&gt;
+
+&lt;p&gt;In his post, Doug writes, “A morality based only on fairness runs the severe risk of homogenizing a culture so severely that all creativity disappears.” However, we can protect against these side effects by framing our morality in terms of minimums. Minimums cannot be gamed, nor can they have a negative influence on creativity and innovation. While maximums create a blanket of standards, minimums can actively fulfill dignity and allow people the freedom they need to thrive.&lt;/p&gt;
+
+&lt;p&gt;When defining these minimums, I rely on the second formulation of Immanuel Kant’s Categorial Imperative, which states, “Act only according to the maxim where you can, at the same time, will that it should become universal law.”&lt;/p&gt;
+
+&lt;p&gt;Would I will that being expected to participate in unplanned overtime become universal behavior? No way! I wouldn’t work somewhere if I couldn’t plan my life. Even high-pressure jobs that require overtime set an expectation so that the uncertainty of required effort doesn’t become debilitating or demoralizing.&lt;/p&gt;
+
+&lt;p&gt;But these disparities between what’s expected and what’s right exist throughout our industry. I have to be actively searching for these gaps when I am making decisions. Diversity gaps are rarely evil behavior, but emerge from small, short-term decisions that are intended to work toward a positive end. It is by definition difficult to uncover these biases. It takes serious reflection to isolate and question them.&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>Wearing The Pants</title>
+   <category term="margaret-pagel" />
+   <link href="http://8thlight.github.com/margaret-pagel/2014/06/24/wearing-the-pants.html"/>
+   <author>
+     <name>["margaret pagel"]</name>
+   </author>
+   <updated>2014-06-24T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/margaret-pagel/2014/06/24/wearing-the-pants</id>
+   <content type="html">&lt;p&gt;I remember the first day I was bold enough to wear pants to work.&lt;/p&gt;
+
+&lt;p&gt;I remember hiding in my office all morning, worried about what my co-workers would say, hoping I wouldn’t have to resort to the back-up skirt hidden in my car. When I finally gathered the courage to be seen, I remember walking the halls of the dental manufacturing facility, half-surprised that no one noticed. Eventually, my boss asked, “New outfit?”&lt;/p&gt;
+
+&lt;p&gt;Stifling the nerves in my voice, I answered, “Yep!” &lt;/p&gt;
+
+&lt;p&gt;And that was that. Not a single fear realized.&lt;/p&gt;
+
+&lt;p&gt;It was the early ’80s, and it wasn’t my idea to break the implied dress code for the first time. I mean, of course I had dreamed of wearing something less cumbersome to work (almost daily!) than a dress or business suit; but I never would have had the courage to actually do something about it if my friend Milly had not introduced me to the possibility. Just a week prior to my own début, I saw her in pants at a trade show, and I thought, “How did she get away with &lt;em&gt;that&lt;/em&gt;?”&lt;/p&gt;
+
+&lt;p&gt;Turns out, the same way I did: she just went for it.&lt;/p&gt;
+
+&lt;p&gt;Perhaps to compensate for my personal acceptance in the workplace, my mother never missed an opportunity to tell me how I was making life more difficult for myself and for my family, in choosing to pursue a career. For working women 30 years ago, encouragement either came from within or it didn’t come at all. It was up to us to do more, achieve more, &lt;em&gt;be&lt;/em&gt; more. My husband knew this, and we built our family around ideals not shared in the majority of households for the time. We were quick to adopt non-traditional roles between us, considering he took care of the laundry and I mowed the lawn for 17 years. We taught our children these same values of equal responsibility with our family motto: “If you see something that needs to be done, just do it!”&lt;/p&gt;
+
+&lt;p&gt;The software industry today shares one thing in common with the dental industry of the ’80s: it just happens to be an industry of predominantly men. Ten years ago, university graduates with dental degrees in the United States were approximately &lt;a href=&quot;http://www.spiritofcaring.com/public/488.cfm&quot;&gt;50% male and 50% female&lt;/a&gt;, and the statistic looks to favor women more and more in the years to come. Many other—and older—industries have seen the same shift: lawyers were once exclusively men; now the majority of law school graduates are women. The opposite trend is occurring in nursing, where male nurses are making a comeback in a role previously dominated by women.&lt;/p&gt;
+
+&lt;p&gt;The truth is that the software industry is still very, very young. We may be overwhelmingly male right now, but that doesn’t mean an imbalance will always exist. And in fact, history indicates that it won’t last. However, just as I couldn’t change the dress code 30 years ago, neither can any one of us close the gender gap alone, even with the “perfect idea” or the “one true perspective.” What you can change, however, is your behavior: by staying proactive, by focusing on the positive instead of pointing fingers, each of us can help foster an environment of inclusion. And hopefully in the years to come, software professionals will include an increasingly diverse selection of individuals. Because among us there are great women and great men, there are great 21-year-olds and great 71-year-olds, and each one is different. Instead of focusing on what divides us, recognize that we are all different, and treat those differences as ways to complement our commonalities.&lt;/p&gt;
+
+&lt;p&gt;One of 8th Light’s most defining traits is that we lead by example, just like how I followed Milly’s example back in the ’80s. That method was effective back then, and I have found it to be just as relevant in my life today. I am proud to have raised three wonderful children—all of whom have grown up following the example set by their progressive-thinking parents—knowing that each of them can do more achieve more, &lt;em&gt;be&lt;/em&gt; more.&lt;/p&gt;
+
+&lt;p&gt;Well, except for my sons, Paul and Mike, who are technically incapable of carrying children. I will concede that women are better than them at that.&lt;/p&gt;
+
+&lt;p&gt;What are &lt;em&gt;you&lt;/em&gt; doing to lead by example?&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>The Pipeline is Full of Acid</title>
+   <category term="meagan-waller" />
+   <link href="http://8thlight.github.com/meagan-waller/2014/06/19/the-pipeline-is-full-of-acid.html"/>
+   <author>
+     <name>["meagan waller"]</name>
+   </author>
+   <updated>2014-06-19T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/meagan-waller/2014/06/19/the-pipeline-is-full-of-acid</id>
+   <content type="html">&lt;p&gt;Last week, my co-worker Doug Bradbury posted on the 8th Light blog to &lt;a href=&quot;http://blog.8thlight.com/doug-bradbury/2014/06/09/gender-equality-is-not-enough.html&quot;&gt;ask about
+gender equality on programming
+teams&lt;/a&gt;. I’ve had some thoughts about his post for a couple of days, but I’d like to take a step back first. I don’t want to entertain the question of if our teams would be stronger with more marginalized folks on them. When you’re a member of the dominant group in the technology field (a white, straight, cisgender, heterosexual male)
+questions like these can quickly turn into hypothetical thought exercises. A
+question to toss around and contemplate, but at the end of the day, these
+questions most likely aren’t keeping you up at night. These questions keep me up
+at night.&lt;/p&gt;
+
+&lt;p&gt;This past spring semester I taught a Girls Who Code club class at The Chicago
+Tech Academy. It was an incredibly rewarding experience. Being given the
+opportunity to teach a group of high school girls some basic programming skills
+and see them flourish and get excited over it nearly brought me tears of joy a
+couple of times. However I started thinking that putting a bandaid on the
+problem, simply teaching girls to code, isn’t going to solve it.
+There are amazing women programmers who have still been threatened, sent death
+and rape threats, pushed out of the field, and have left technology all
+together. Being able to program didn’t help them. Being able to write code, even
+write code really well, didn’t prevent it from happening.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;en&quot;&gt;&lt;p&gt;OH: Should we be encouraging
+women to get into the pipeline when we know the pipeline leads to a sewage
+treatment plant?&lt;/p&gt;&amp;mdash; despondent (@ashedryden) &lt;a
+href=&quot;https://twitter.com/ashedryden/statuses/392052865709002752&quot;&gt;October 20,
+2013&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Before we can start asking why we need more marginalized folks on our teams, we
+have to ask how we can fix the toxicity that is the technology workforce.
+Throwing more marginalized people on our teams but never addressing the root
+factors, the ingrained sexism, misogyny, racism, homophobia, transphobia, and
+ableism, means we’re putting the responsibility of fixing the culture solely on
+those who are most affected by it.&lt;/p&gt;
+
+&lt;p&gt;We already know that the attrition rates for women in technology are &lt;a href=&quot;http://www.forbes.com/sites/bruceupbin/2014/05/12/the-tech-sector-needs-more-women-heres-how-you-can-make-it-happen/&quot;&gt;way too high&lt;/a&gt;. Why do we think that just adding more women to our team will solve this problem? I never hear anyone say that they should fix their totaled car by adding a new coat of paint, or giving it a new set of tires. &lt;/p&gt;
+
+&lt;p&gt;I’d be lying if I said that the thought of leaving the technology field hasn’t
+crossed my mind more than once. Dealing with hairy bugs, awful IDE’s (I’m
+looking at you, Xcode), and hard programming problems are tough enough without
+having to deal with &lt;a href=&quot;http://juliepagano.com/blog/2013/03/24/my-experiences-in-tech-death-by-1000-paper-cuts/&quot;&gt;all the microaggressions&lt;/a&gt;, death threats, rape threats, and sexual harassment that I, as a woman in technology, have faced, and I’ve only been in the field since early 2013. I don&amp;#39;t leave because I don&amp;#39;t want to add a number to the statistics. I don&amp;#39;t want to add another tick in the count to the women that were chewed up and spit out by the toxic environment.&lt;/p&gt;
+
+&lt;p&gt;To answer Doug&amp;#39;s question: no, gender equality isn&amp;#39;t enough. But maybe not for the reasons that you think. Simply demanding a ratio to fulfill some diversity quota isn&amp;#39;t going to fix the broken culture that we work in. Adding more women to our teams, adding more marginalized folks to our teams, and patting ourselves on the back isn&amp;#39;t helpful, and it&amp;#39;s not a solution.&lt;/p&gt;
+
+&lt;p&gt;Instead of asking questions that verge on thought exercises, questions that make
+us feel good for asking them, let’s ask questions that make us uncomfortable.
+Instead of asking why more women on our teams would be good, let’s ask why there
+aren’t women on our teams already. Instead of saying we should focus on individuals and not on entire groups of people, let&amp;#39;s ask why all of our recent hires are from the same group of people. It’s great to get more marginalized people into the technology field, but if we’re not actively working to remove the acid from the pipeline, what’s the point?&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in helping to fix the toxic culture, check out my website:
+&lt;a href=&quot;http://www.dayssincelasttechincident.com&quot;&gt;Days Since Last Tech Incident&lt;/a&gt; for resources, blog posts, and information on how to do just that.&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>How Men and Women Think Differently</title>
+   <category term="doug-bradbury" />
+   <link href="http://8thlight.github.com/doug-bradbury/2014/06/18/how-men-and-women-think-differently.html"/>
+   <author>
+     <name>["doug bradbury"]</name>
+   </author>
+   <updated>2014-06-18T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/doug-bradbury/2014/06/18/how-men-and-women-think-differently</id>
+   <content type="html">&lt;h2&gt;I used to ask a question when interviewing apprentice candidates that was designed to discover their passion: “When was the last time you stayed up all night working on something?”&lt;/h2&gt;
+
+&lt;p&gt;I thought it was a pretty clever question. A passionate person is one who would get so excited and myopically focused on something they loved that they would forget to sleep and work through the night just for the love of it.&lt;/p&gt;
+
+&lt;p&gt;It turns out that I wasn’t uncovering passion. Instead, I was just uncovering whether or not the person was a 20-something man-child. Working through the night on something is an expression of passion in a certain group of people, but it’s also an expression of immaturity and short-term thinking. A long-term thinker might realize that staying up tonight will negatively affect his ability to pursue his passion tomorrow. A more mature person would realize that some problems are best approached after a good night’s sleep.&lt;/p&gt;
+
+&lt;p&gt;I discovered the gender bias in my interview question after I read a study from Carnegie Mellon University that was conducted from 1995 to 1999 by Jane Margolis. The study reveals that when it comes to computing, women’s interests tend to be broader than men’s. Unfortunately for women, the programming culture tends to reward narrow rather than broad focus.  Many women end up feeling as though they do not belong in the profession because of this. They can feel as though their interests are too broad for a programming career.&lt;/p&gt;
+
+&lt;blockquote&gt;
+The dominate CS culture does not venerate multiple interests. Instead the singular and obsessive interest in computing that is common among men is assumed to be the road to success in computing. The model shapes the assumptions of who will succeed and who &quot;belongs&quot; in the discipline. &lt;/blockquote&gt;
+
+&lt;p&gt;&lt;cite&gt;Jane Margolis in &amp;quot;Unlocking the Clubhouse&amp;quot; p71&lt;/cite&gt;&lt;/p&gt;
+
+&lt;p&gt;Women can also be passionate about programming, but rarely does it express itself as an intense and myopic focus at the exclusion of health and relationships as it sometimes does in men. Twenty percent of women in the CMU study reported feeling that they didn&amp;#39;t belong in computer science because they didn’t &amp;quot;Love&amp;quot; it as much as men. This research made me realize that I needed new interview questions, ones that would uncover different expressions of passion for programming. &lt;/p&gt;
+
+&lt;p&gt;I shared this research with my wife. It did not come as surprise to her. She likes to explain this difference between men and women using an analogy with bedroom furniture. Men are like a chest of drawers. They pull open a drawer, get something out, close it, and open another one. Women, on the other hand, are like a walk-in closet. They see everything all at once. Men tend to be focused on only the thing that is directly in front of them and women tend to focus more broadly with more context.&lt;/p&gt;
+
+&lt;p&gt;This is why conversations with my wife often take inexplicable (to me) turns. We will be talking about her staff meeting one second, and all of a sudden she’ll jump to a story from a trip we took years ago. I have no idea how we got there. Sometimes, she’ll back up and connect the dots for me, and I’ll marvel at the multiple streams of thought she keeps in her head all at once.&lt;/p&gt;
+
+&lt;p&gt;I, on the other hand, cannot even sit in a room where I can hear two conversations at once. We’ll be in a restaurant, enjoying ourselves, and I’ll suddenly find myself tuned in to the conversation at the table behind us, unaware of what’s going on in front of me. Or, if I head upstairs to grab a pair of socks but see a stack of magazines on my way up, I’ll find myself standing over the recycle bin still in bare feet. One thing at a time. It’s how my brain works. The only way I survive is by making lists and checking things off one at a time.&lt;/p&gt;
+
+&lt;p&gt;Now, what I’ve shared is a research-based generalization. It’s certainly not true for all people. Gender does not pigeon-hole a person into being a broad or narrow thinker. But I do think this is a significant enough gender difference that we should talk about. &lt;/p&gt;
+
+&lt;p&gt;How does this play out on programming teams?&lt;/p&gt;
+
+&lt;p&gt;A team is in an iteration planning meeting. A man will be focused very deeply in talking about a specific feature. Out of nowhere, a woman on the team will ask a question that seems completely unrelated. The man will be frustrated by distraction and digression. The woman will be frustrated because the team is ignoring an important consideration. &lt;/p&gt;
+
+&lt;p&gt;A woman talks in the stand-up meeting at length about the branch she’s been working on. A man on the team hears that she’s not ready to merge the code. She seems to be wanting him to do something with it, but he has no idea what. &lt;/p&gt;
+
+&lt;p&gt;A man is “head-down” coding away, but a woman has some new critical insight or information about the problem he is working on. She doesn’t want to interrupt him, but she tries anyway and fails to grab his attention. She feels like her voice isn’t heard or important to the team. He is annoyed that someone tried to break his concentration.&lt;/p&gt;
+
+&lt;p&gt;Armed with a little bit of gender-awareness, both men and women in this situation can develop strategies to reduce frustrations and obtain better outcomes.&lt;/p&gt;
+
+&lt;p&gt;Men: Your intense focus isn’t always what it’s cracked up to be. Allow yourself to be interrupted more often and you’ll probably get your task done sooner.&lt;/p&gt;
+
+&lt;p&gt;Women: Sometimes there’s no way to solve a problem except by focusing on pushing through it. &lt;/p&gt;
+
+&lt;p&gt;Men: She isn’t trying to annoy you, she is just trying to get your attention because you are doing something short-sighted or unnecessary.&lt;/p&gt;
+
+&lt;p&gt;Women: Know that he does actually value your input. Sometimes he is just so absorbed in something else that he doesn’t hear it. It might take a louder attempt to get his attention.&lt;/p&gt;
+
+&lt;p&gt;Men: When a woman interrupts you, stop what you’re doing and give her your full attention.  She’s about to tell you something that could save you tons of time. She’s already debated for quite a while whether or not to break your concentration. What she has to say is important.&lt;/p&gt;
+
+&lt;p&gt;Women: When you need something from a man, you have to be very specific. He can’t process the entire context that has led you to this need. Just tell him exactly what you need from him and when you need it.&lt;/p&gt;
+
+&lt;p&gt;Just the tiniest bit of gender awareness can make a big difference inside of a team. Take a moment and imagine a team balanced with both kinds of thinkers. What does this diverse team whose members understand the ways in which they’re different look like? &lt;/p&gt;
+
+&lt;p&gt;As a team, they make fewer mistakes. They overlook less. They fill in the gaps for each other. Their strengths complement each other’s weaknesses. They manage to keep an eye on the forest and trees at the same time. &lt;/p&gt;
+
+&lt;p&gt;That’s the kind of team I want to be on. Don’t you?&lt;/p&gt;
+
+&lt;p&gt;&lt;small&gt;
+Margolis, Jane and Fisher, Allan. Unlocking the Clubhouse: Women in Computing. The MIT Press. February 2003.
+&lt;/small&gt;&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>Feeling Othered</title>
+   <category term="malcolm-newsome" />
+   <link href="http://8thlight.github.com/malcolm-newsome/2014/06/18/feeling-othered.html"/>
+   <author>
+     <name>["malcolm newsome"]</name>
+   </author>
+   <updated>2014-06-18T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/malcolm-newsome/2014/06/18/feeling-othered</id>
+   <content type="html">&lt;p&gt;I recently had the distinct pleasure of speaking with three aspiring software developers.  They recently enrolled in a code school that helps facilitate their learning and prepare them for careers in the software field.  They are sharp and strong critical thinkers.  They are ambitious and eager to make a difference.&lt;/p&gt;
+
+&lt;p&gt;And, oh, by the way…they are Black.&lt;/p&gt;
+
+&lt;p&gt;Recently, there has been a lot of discussion around our office as it pertains to gender disparity in our industry.  In fact, &lt;a href=&quot;http://blog.8thlight.com/doug-bradbury/archive.html&quot;&gt;Doug&lt;/a&gt;, &lt;a href=&quot;http://blog.8thlight.com/kevin-buchanan/2014/06/13/individuals-not-groups.html&quot;&gt;Kevin&lt;/a&gt;, and &lt;a href=&quot;http://blog.8thlight.com/meagan-waller/2014/06/19/the-pipeline-is-full-of-acid.html&quot;&gt;Meagan&lt;/a&gt; recently wrote some thought provoking blog posts on the subject.  Through it all, though, I realized something.  I realized that no one from 8th Light approached me about the broader topic of diversity nor did anyone ask what my experiences have been like as a Black male in our company or in the industry as a whole.&lt;/p&gt;
+
+&lt;p&gt;And, guess what?  I&amp;#39;m &lt;strong&gt;REALLY&lt;/strong&gt; glad about that.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Here&amp;#39;s Why&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;While thinking about the topic of diversity in the software field, I took some time to reflect on my personal experiences since I began learning to code in 2011.  As I looked back,  I realized that, at every step of the way, I was mentored, encouraged, and embraced by talented developers—none of whom shared my same ethnic heritage.  At no point was I made to feel like I didn&amp;#39;t belong.  I&amp;#39;ve had no negative experiences because of my race.  In fact, the more I thought about it, I realized that my main concern was always over whether I was becoming proficient enough to work full-time as a developer.  Quite frankly, I never gave any thought to whether or not I would fit in or be accepted on the basis of my skin color.&lt;/p&gt;
+
+&lt;p&gt;So, while preparing to write this blog post, I began to wonder if my thoughts and experiences were unique to me.  I also found myself wondering if there were aspiring developers that were primarily concerned about their ability to succeed in this industry because of the color of their skin.  Upon speaking with these new developers, it was refreshing to learn that they, too, were not concerned their race would be a limiting factor as they pursued careers as software developers.  Furthermore, as they spoke, something important came to light.  They remarked at how seldom they have felt &lt;em&gt;othered&lt;/em&gt;—a feeling that occurs when someone makes it obvious that they recognize that you are physically different—and acts on that recognition in some form or fashion.&lt;/p&gt;
+
+&lt;p&gt;As I thought back over the time that I&amp;#39;ve spent in the software industry, I can honestly say that I can&amp;#39;t think of a time that I have felt &lt;em&gt;othered&lt;/em&gt;.  That makes me happy.  Ultimately, I don&amp;#39;t want people to care about my contributions because I have a nice, shiny bald head—or any other physical trait for that matter.  Instead, I want people to care about my contributions because I am a member of the team and, more importantly, because of excellent qualities and proficiencies that I demonstrate.  Therefore, I am pleased to say that, in my experience, being treated this way has been the rule and not the exception.&lt;/p&gt;
+
+&lt;p&gt;And, all of that brings me to this conclusion:&lt;/p&gt;
+
+&lt;p&gt;If—or, perhaps when—the topic of diversity arises, it&amp;#39;s important to keep in mind that those who are in the minority within your company or organization may potentially be bothered by &lt;em&gt;attempts&lt;/em&gt; at inclusion.  This can be the case because such attempts can often serve as a reminder that someone is constantly viewing them as though they are different.  The most effective way to make people feel valued is by genuinely embracing them as a part of the team.  Regardless of their physical make-up, every team member has their own needs and desires.  Those needs and desires are discovered as bonds are formed and relationships are established.  Then, when that truly happens, people won&amp;#39;t feel &lt;em&gt;othered&lt;/em&gt;.  It&amp;#39;s that simple.  No diversity training needed.&lt;/p&gt;
+</content>
+ </entry>
+
+ <entry>
+   <title>Individuals, Not Groups</title>
+   <category term="kevin-buchanan" />
+   <link href="http://8thlight.github.com/kevin-buchanan/2014/06/13/individuals-not-groups.html"/>
+   <author>
+     <name>["kevin buchanan"]</name>
+   </author>
+   <updated>2014-06-13T00:00:00-07:00</updated>
+   <id>http://8thlight.github.com/kevin-buchanan/2014/06/13/individuals-not-groups</id>
+   <content type="html">&lt;p&gt;Doug asked a couple of thought provoking questions in his &lt;a href=&quot;http://blog.8thlight.com/doug-bradbury/2014/06/09/gender-equality-is-not-enough.html&quot;&gt;recent blog post&lt;/a&gt; about gender equality:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;What is unique about women that make them not just equal, but superior on software development teams? How can our differences make stronger teams and a stronger industry?&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I really struggled with this question. My attempt to break this question down gave rise to a few different questions. What kinds of things would make one superior on a software development team? Where would that superior trait stem from? Would it be due to whether an individual happens to be a woman? Would all women have this trait?&lt;/p&gt;
+
+&lt;p&gt;I can&amp;#39;t honestly provide one answer to this question, before digressing into pure physical differences, unless there is possibly something to be derived from being part of an underrepresented group - women - in our specific workplace. Does being in the gender minority in the workplace possibly convey an added drive or a heightened sense of competitiveness? That could possibly be a superior trait to have, but it seems that it would more closely depend on an individual&amp;#39;s personality and character. Does this woman happen be an athlete and enjoy competition? Does this woman happen to really enjoy learning new things in an uncompetitive environment? A naive, stereotypical, probably offensive response to this question would be that women are more in touch with their and others emotions, or are more right brain thinkers, while men are more left brain thinkers.&lt;/p&gt;
+
+&lt;p&gt;The conclusion I ultimately come to is that superiority isn&amp;#39;t to be found by randomly selecting one person from one group. We shouldn&amp;#39;t be desiring women on our development teams simply because women bring something different to the table. People with superior traits bring superior traits to the table. We need to start including women on our software teams because you&amp;#39;re more likely to find the people with superior traits if you&amp;#39;re not excluding an entire group of people from your possibilities. From a business perspective, it&amp;#39;s just math. From a humanistic perspective, it&amp;#39;s just the right thing to do.&lt;/p&gt;
+
+&lt;p&gt;As individuals, we are not all equal in the skills that we can bring to different jobs. As groups, men or women, we are equal. We are equal in that both men and women have the potential to be superior software developers. The problem is that many individuals, mostly men, have forgotten, or have been taught, that these groups are different when it comes to the potential for traits that we want in software developers, or any vocation. The easy solution is to stop talking in terms of groups and focus on individuals. If an individual can bring something to my software team, I&amp;#39;d like them on it. If an individual is made uncomfortable in our work environment, we should address it.&lt;/p&gt;
+
+&lt;p&gt;So, what is it about women that make them not just equal, but superior on software development teams? Well, they could have a lot of experience working with Javascript frameworks, or they could be really passionate about new technologies, or they could be really good at modeling data, or they could give great feedback on code reviews, or they could know a lot of different design patterns, or they could communicate very effectively with clients, or they could know everything there is to know about Ruby. They &lt;em&gt;could&lt;/em&gt; be a lot of things that would make a superior software team member. But you&amp;#39;ll never find out if you approach women, or any group for that matter, with the idea that being part of that group inherently cultivates or stifles certain skills that you desire on your team.&lt;/p&gt;
+</content>
+ </entry>
+
+
+</feed>

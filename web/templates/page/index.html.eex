@@ -1,0 +1,11 @@
+<h1>Feeds</h1>
+<h3><a href="/new">New Feed</a></h3>
+<ul>
+<%= for feed <- @feeds do %>
+  <li>
+    <%= feed.type %> - <%= feed.url %>
+    <a href="/<%= feed.id %>/delete" class="btn btn-default btn-sm">Delete</a>
+  </li>
+<% end %>
+</ul>
+
