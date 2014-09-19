@@ -1,10 +1,11 @@
-<h1>Feeds</h1>
-<ul>
-<%= for feed <- @feeds do %>
-  <li>
-    <h3><%= feed.title %></h3>
-    <%= feed.body %>
-  </li>
-<% end %>
-</ul>
-
+<div class="feeds">
+  <h1>Feeds</h1>
+  <ul>
+  <%= for feed <- @feeds do %>
+    <li>
+      <h3><a href="<%= feed.link %>"><%= feed.title %></a></h3>
+      <%= feed.body %>
+    </li>
+  <% end %>
+  </ul>
+</div>
