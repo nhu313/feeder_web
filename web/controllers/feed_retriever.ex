@@ -12,7 +12,6 @@ defmodule FeedRetriever do
   end
 
   def retrieve_content(feed) do
-    IO.puts "parsing #{feed.url}"
     HTTPotion.start
     response = HTTPotion.get feed.url
     RssParser.parse(response.body, feed.type)
@@ -21,7 +20,7 @@ defmodule FeedRetriever do
   end
 
   def shorten_body(item) do
-    %{item | body: String.slice(item.body, 0, 200)}
+    %{item | body: String.slice(item.body, 0, 400)}
   end
 
   def strip_html_tags(node) do
