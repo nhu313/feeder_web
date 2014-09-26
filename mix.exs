@@ -13,7 +13,7 @@ defmodule FeederWeb.Mixfile do
   def application do
     [
       mod: { FeederWeb, [] },
-      applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto]
+      applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto, :timex]
     ]
   end
 
@@ -29,7 +29,8 @@ defmodule FeederWeb.Mixfile do
       {:postgrex, "0.6.0"},
       {:ecto, "0.2.4"},
       {:httpotion, github: "myfreeweb/httpotion" },
-      {:quinn, "0.0.2"}
+      {:quinn, "0.0.2"},
+      {:timex, "0.12.8"}
     ]
   end
 end

@@ -1,4 +1,5 @@
 defmodule RssParser do
+  use Timex
 
   def parse(xml, "rss") do
     parse(xml, &convert_rss(&1), :item)
@@ -15,15 +16,19 @@ defmodule RssParser do
   end
 
   defp convert_rss(entry) do
+    {_, parsed_date} = DateFormat.parse(find_value(entry, :pubDate), "{RFC1123z}")
+
     %{body: find_value(entry, :"description"),
-             date: find_value(entry, :pubDate),
+             date: parsed_date,
              link: find_value(entry, :link),
              title: find_value(entry, :title)}
   end
 
   defp convert_atom(entry) do
+    {_, parsed_date} = DateFormat.parse(find_value(entry, :updated), "{RFC3339}")
+
     %{body: find_value(entry, :content),
-             date: find_value(entry, :updated),
+             date: parsed_date,
              link: find_attr(entry, :link, :href),
              title: find_value(entry, :title)}
   end
